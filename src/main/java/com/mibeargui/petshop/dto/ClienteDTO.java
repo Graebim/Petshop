@@ -1,57 +1,55 @@
-package com.mibeargui.petshop.entities;
+package com.mibeargui.petshop.dto;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.springframework.beans.BeanUtils;
 
-@Entity
-@Table(name = "clientes")
-public class Cliente {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import com.mibeargui.petshop.entities.Cliente;
+
+public class ClienteDTO {
+
     private Long id;
     private String nome;
     private String cpf;
     private LocalDate dataCadastro;
     
-    public Cliente() {
+    public ClienteDTO() {
+    }
+    
+    public ClienteDTO(Cliente entities) {
+    	BeanUtils.copyProperties(entities, this);
     }
 
-    public Cliente(Long id, String nome, String cpf, LocalDate dataCadastro) {
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.dataCadastro = dataCadastro;
-	}
-
-	// getters e setters
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
+
 	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-
+  
 }
