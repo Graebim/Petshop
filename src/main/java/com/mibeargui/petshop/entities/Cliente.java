@@ -3,6 +3,7 @@ package com.mibeargui.petshop.entities;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,8 +18,9 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(nullable = true, length = 11)
     private String cpf;
-    private LocalDate dataCadastro;
+	private LocalDate dataCadastro;
     
     public Cliente() {
     }

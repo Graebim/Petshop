@@ -2,54 +2,63 @@ package com.mibeargui.petshop.dto;
 
 import java.time.LocalDate;
 
-import org.springframework.beans.BeanUtils;
-
 import com.mibeargui.petshop.entities.Cliente;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class ClienteDTO {
 
     private Long id;
+
+    @NotBlank
     private String nome;
-    private String cpf;
-    private LocalDate dataCadastro;
     
+    @Size(max = 11)
+    private String cpf;
+
+    private LocalDate dataCadastro;
+
     public ClienteDTO() {
     }
-    
+
     public ClienteDTO(Cliente entities) {
-    	BeanUtils.copyProperties(entities, this);
+        this.id = entities.getId();
+        this.nome = entities.getNome();
+        this.cpf = entities.getCpf();
+        this.dataCadastro = entities.getDataCadastro();
     }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
-	}
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
 
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-  
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
 }
