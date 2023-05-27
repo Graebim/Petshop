@@ -14,9 +14,9 @@ public class UsuarioController {
 	@Autowired
     private UsuarioService usuarioService;
 
-	@GetMapping(value = "/{cpf}")
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-    }
+//	@GetMapping(value = "/{cpf}")
+//    public UsuarioController(UsuarioService usuarioService) {
+//       this.usuarioService = usuarioService;
+//    }
 
 }

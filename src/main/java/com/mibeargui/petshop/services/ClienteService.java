@@ -3,12 +3,14 @@ package com.mibeargui.petshop.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mibeargui.petshop.dto.ClienteDTO;
 import com.mibeargui.petshop.entities.Cliente;
 import com.mibeargui.petshop.repositories.ClienteRepository;
 
+@Service
 public class ClienteService {
 
 	@Autowired
