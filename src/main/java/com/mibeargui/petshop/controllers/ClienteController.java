@@ -1,59 +1,64 @@
 package com.mibeargui.petshop.controllers;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mibeargui.petshop.dto.ClienteDTO;
 import com.mibeargui.petshop.entities.Cliente;
-import com.mibeargui.petshop.services.ClienteService;
+import com.mibeargui.petshop.repositories.ClienteRepository;
+import com.mibeargui.petshop.swagger.AuthorizationInfo;
 
-import jakarta.validation.Valid;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping
+@Api(value="API REST Pets")
 public class ClienteController {
 
+
     @Autowired
-    private ClienteService clienteService;
+    ClienteRepository clienteRepository;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ClienteDTO> findById(@PathVariable Long id) {
-        ClienteDTO clienteDTO = clienteService.findById(id);
-        if (clienteDTO != null) {
-            return ResponseEntity.ok(clienteDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @AuthorizationInfo
+    @ApiOperation(value="Retorna uma lista de clientes")
+    @GetMapping(value="/clientes")
+    public List<Cliente> listaClientes(){
+        return clienteRepository.findAll();
+    }
+    @AuthorizationInfo
+    @ApiOperation(value="Retorna um cliente unico")
+    @GetMapping("/cliente/{id}")
+    public Cliente listaClienteUnico(@PathVariable(value="id") long id){
+        return clienteRepository.findById(id);
+    }
+    @AuthorizationInfo
+    @ApiOperation(value="Adiciona um cliente")
+    @PostMapping(value="/cliente")
+    public Cliente salvaCliente(@RequestBody @Validated Cliente cliente) {
+        return clienteRepository.save(cliente);
+    }
+    @AuthorizationInfo
+    @ApiOperation(value="Deleta um cliente")
+    @DeleteMapping(value="/cliente/{id}")
+    public void deletaCliente(@PathVariable(value="id") long id) { clienteRepository.deleteById(id);  }
+    @AuthorizationInfo
+    @ApiOperation(value="Atualiza um cliente")
+    @PutMapping(value="/cliente")
+    public Cliente atualizaCliente(@RequestBody @Validated Cliente cliente) {
+        return clienteRepository.save(cliente);
     }
 
-    @GetMapping
-    public List<ClienteDTO> findAll() {
-        return clienteService.findAll();
-    }
 
-    @PostMapping
-    public ResponseEntity<Object> saveCliente(@RequestBody @Valid ClienteDTO clienteDTO) {
-        if (clienteService.existsByCpf(clienteDTO.getCpf())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: CPF already in use!");
-        }
-
-        Cliente cliente = new Cliente();
-        BeanUtils.copyProperties(clienteDTO, cliente);
-        cliente.setDataCadastro(LocalDate.now(ZoneId.of("UTC")));
-        cliente = clienteService.save(cliente);
-        ClienteDTO savedClienteDTO = new ClienteDTO(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedClienteDTO);
-    }
 }

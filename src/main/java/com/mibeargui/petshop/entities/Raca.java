@@ -1,30 +1,44 @@
 package com.mibeargui.petshop.entities;
 
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "racas")
-public class Raca {
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Entity(name = "tbl_raca")
+@Table(name = "tbl_raca")
+public class Raca implements Serializable {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private long racaId;
+
     private String descricao;
 
-    // getters e setters
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+/*
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="fk_raca_pets",foreignKey = @ForeignKey(name = "fk_raca_pets"))
+    @JsonManagedReference
+    private List<Pets> petsList = new ArrayList<>();
+    public void addPets(Pets pets) {
+        petsList.add(pets);
+    }
+    public void removePets(Pets pets) {
+        petsList.remove(pets);
+    }*/
+
+
 }

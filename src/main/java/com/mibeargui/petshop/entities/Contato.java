@@ -1,51 +1,61 @@
 package com.mibeargui.petshop.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "contatos")
-public class Contato {
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Entity(name = "tbl_contato")
+@Table(name = "tbl_contato")
+public class Contato implements Serializable {
+
+    private static final long serialVersionUID = 1l;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long idCliente;
-    private String tag;
-    private String tipo;
-    private String valor;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private long contatoId;
 
-    // getters e setters
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getIdCliente() {
-		return idCliente;
-	}
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
-	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-	public String getTipo() {
-		return tipo;
-	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-	public String getValor() {
-		return valor;
-	}
-	public void setValor(String valor) {
-		this.valor = valor;
-	}    
+    @Column(name = "Id_cliente")
+    private long clienteId;
+
+
+    @Column(name = "tipo")
+    private String tipo;
+
+
+    @Column(name = "valor")
+    private double valor;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="fk_contato_endereco",foreignKey = @ForeignKey(name = "fk_contato_endereco"))
+    @JsonManagedReference
+    private List<Endereco> enderecoList = new ArrayList<>();
+    public void addEndereco(Endereco endereco) {
+        enderecoList.add(endereco);
+    }
+    public void removeEndereco(Endereco endereco) {
+        enderecoList.remove(endereco);
+    }
+
 }

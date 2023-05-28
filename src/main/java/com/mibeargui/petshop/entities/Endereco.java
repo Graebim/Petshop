@@ -1,65 +1,99 @@
 package com.mibeargui.petshop.entities;
 
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
-@Entity
-@Table(name = "enderecos")
-public class Endereco {
+@Data
+@Entity(name = "tbl_endereco")
+@Table(name = "tbl_endereco")
+public class Endereco implements Serializable {
+
+    private static final long serialVersionUID = 1l;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long idCliente;
-    private String logradouro;
-    private String cidade;
-    private String bairro;
-    private String complemento;
-    private String tag;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private long enderecoId;
 
-    // getters e setters
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getIdCliente() {
-		return idCliente;
-	}
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
-	}
-	public String getLogradouro() {
-		return logradouro;
-	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	public String getComplemento() {
-		return complemento;
-	}
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
+
+    private String cidade;
+
+
+    private String bairro;
+
+
+    private String logradouro;
+
+    private String complemento;
+    private long tag;
+
+/*    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_endereco_cliente", foreignKey = @ForeignKey(name = "fk_endereco_cliente"))
+    @JsonBackReference
+    private Cliente cliente;
+
+*/
+
+
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (enderecoId ^ (enderecoId >>> 32));
+        result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
+        result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
+        result = prime * result + ((logradouro == null) ? 0 : logradouro.hashCode());
+        result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
+        result = prime * result + (int) (tag ^ (tag >>> 32));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Endereco other = (Endereco) obj;
+        if (enderecoId != other.enderecoId)
+            return false;
+        if (cidade == null) {
+            if (other.cidade != null)
+                return false;
+        } else if (!cidade.equals(other.cidade))
+            return false;
+        if (bairro == null) {
+            if (other.bairro != null)
+                return false;
+        } else if (!bairro.equals(other.bairro))
+            return false;
+        if (logradouro == null) {
+            if (other.logradouro != null)
+                return false;
+        } else if (!logradouro.equals(other.logradouro))
+            return false;
+        if (complemento == null) {
+            if (other.complemento != null)
+                return false;
+        } else if (!complemento.equals(other.complemento))
+            return false;
+        if (tag != other.tag)
+            return false;
+        return true;
+    }
+
+
+
+
 }
