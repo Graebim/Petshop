@@ -1,4 +1,4 @@
-package com.mibeargui.petshop.entities;
+ package com.mibeargui.petshop.entities;
 
 import java.util.Set;
 
@@ -40,8 +40,18 @@ public class User {
             }
     )
     private Set<Role> role;
+    
+    
 
-    public String getUsername() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
         return username;
     }
 
@@ -66,7 +76,15 @@ public class User {
         this.password = userPassword;
     }
 
-    public Set<Role> getRole() {
+    public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public Set<Role> getRole() {
         return role;
     }
 

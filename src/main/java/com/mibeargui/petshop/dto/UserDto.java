@@ -45,8 +45,26 @@ public class UserDto {
     public void setUsername(String username) {
         this.username = username;
     }
+    
+    public String getCpf() {
+		return cpf;
+	}
 
-    public UserDto(User user) {
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
+	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public UserDto(User user) {
         this.id = user.getId();
         this.cpf = user.getCpf();
         this.username = user.getUsername();
