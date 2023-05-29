@@ -21,6 +21,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,17 +37,15 @@ public class Pets implements Serializable {
     @Column(name = "id")
     private long petId;
 
-    //@NotBlank (message = "O nome do cliente não pode ser vazio")
+    @NotBlank (message = "O nome do cliente não pode ser vazio")
     @Column(name = "clienteId")
     private long clienteId;
 
-
-
-    //@NotBlank (message = "A raça não pode ser vazia")
+    @NotBlank (message = "A raça não pode ser vazia")
     private String racaPet;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
-    //@NotBlank (message = "O nome  não pode ser vazio")
+    @NotBlank (message = "O nome  não pode ser vazio")
     private String nome;
 
     @JsonIgnore
@@ -67,8 +66,6 @@ public class Pets implements Serializable {
     @JsonBackReference
     private Raca raca;
 
-
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -80,5 +77,4 @@ public class Pets implements Serializable {
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
         return result;
     }
-
 }
