@@ -1,10 +1,19 @@
-INSERT INTO clientes (nome, cpf, data_cadastro) VALUES ('João', 12345678901, '2022-01-01');
-INSERT INTO clientes (nome, cpf, data_cadastro) VALUES ('Maria', 98765432109, '2022-02-15');
-INSERT INTO clientes (nome, cpf, data_cadastro) VALUES ('Pedro', 45678912304, '2022-03-10');
-INSERT INTO clientes (nome, cpf, data_cadastro) VALUES ('Ana', 78901234506, '2022-04-05');
-INSERT INTO clientes (nome, cpf, data_cadastro) VALUES ('Carlos', 01234567890, '2022-05-20');
-INSERT INTO clientes (nome, cpf, data_cadastro) VALUES ('Laura', 56789012345, '2022-06-15');
-INSERT INTO clientes (nome, cpf, data_cadastro) VALUES ('Fernando', 90123456789, '2022-07-10');
-INSERT INTO clientes (nome, cpf, data_cadastro) VALUES ('Mariana', 34567890123, '2022-08-25');
-INSERT INTO clientes (nome, cpf, data_cadastro) VALUES ('Rafael', 67890123456, '2022-09-30');
-INSERT INTO clientes (nome, data_cadastro) VALUES ('Julia', '2022-10-15');
+
+insert into user(id,cpf, username,password)
+values(1,'086.087.087/999','lucas','$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e');
+
+
+insert into user(id,cpf, username,password)
+values(2,'086.654.087/009','lcs','$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e');
+
+
+insert into user(id,cpf, username,password)
+values(3,'432.087.087/009','admin','$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e');
+
+
+insert into user(id,cpf, username,password)
+values(4,'086.087.087/009','user','$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e');
+
+
+insert into user(id,cpf, username,password)
+values(5,'086.087.654/009','teste','$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e');
